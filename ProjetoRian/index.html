@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca Musical</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="intro-screen">
+        <h1 class="app-name">Sugestões Musicais</h1>
+        <p class="app-description" style="display: none;">Encontre e ouça suas músicas favoritas, ouvindo prévias e achando a sua musica ideal.</p>
+        <div class="background-icons">
+            <i class="fas fa-music"></i>
+            <i class="fas fa-headphones-alt"></i>
+            <i class="fas fa-volume-up"></i>
+            <i class="fas fa-guitar"></i>
+            <i class="fas fa-microphone"></i>
+        </div>
+    </div>
+    <div id="container" style="display:none;">
+        <div id="info">
+            <h2>Prévia de Músicas</h2>
+            <p>Desenvolvido por Rian Eduardo. Projeto desenvolvido para a aula do CMSP - Alura na aula de tecnologia da Professora Amanda Vidal.</p>
+        </div>
+        <div id="playlist-container">
+            <h3>Ouça nossa Playlist:</h3>
+            <a href="https://open.spotify.com/playlist/3saGrMvMa2rVFbngZ57XV2?si=0f3617a9714945d5" target="_blank" class="playlist-link">Clique aqui para ouvir no Spotify</a>
+        </div>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Buscar música ou artista...">
+            <button id="search-button">Buscar</button>
+            <button id="history-button">Histórico</button> <!-- Botão para histórico -->
+        </div>
+        <div id="suggestions-container"></div> <!-- Contêiner para sugestões -->
+        <div id="main-container">
+            <div id="songs-container"></div>
+            <div id="history-container" style="display:none;"> <!-- Seção para histórico -->
+                <h3>Histórico de Músicas</h3>
+                <div id="history-list"></div> <!-- Lista de histórico -->
+            </div>
+        </div>
+
+        <!-- Contêiner para a mensagem quando a música terminar -->
+        <div id="preview-finished-message" style="display: none;">
+            <p id="finished-message-text"></p>
+            <div class="message-buttons">
+                <a id="spotify-link" href="#" target="_blank">Ouvir Completo no Spotify</a>
+                <button id="continue-exploring">Continuar Explorando</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
