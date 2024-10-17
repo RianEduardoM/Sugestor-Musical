@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let accessToken = '';
     let currentAudio = null; // Áudio atual
     let currentTrackElement = null; // Elemento da música atual
+    let currentTrack = null; // Armazena a música atual em reprodução
     let history = []; // Histórico de músicas
 
     // Função para obter o access token
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para exibir músicas
     function displaySongs(tracks) {
-        songsContainer.innerHTML = '';
+        songsContainer.innerHTML = ''; // Limpa as músicas exibidas
         if (tracks.length === 0) {
             songsContainer.innerHTML = '<p>Nenhuma música encontrada.</p>';
             return;
@@ -102,25 +103,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 trackElement.querySelector('.controls').style.display = 'none'; // Ocultar controles
             });
 
-            // Evento de reprodução
+            // Botões de controle
             const playButton = trackElement.querySelector('.play-button');
             const pauseButton = trackElement.querySelector('.pause-button');
 
+            // Evento de reprodução
             playButton.addEventListener('click', () => {
                 if (currentAudio) {
                     currentAudio.pause(); // Pausa a música atual, se houver
                     currentTrackElement.classList.remove('highlight'); // Remove o destaque da música anterior
+                    currentTrackElement.querySelector('.pause-button').style.display = 'none'; // Esconde o botão Pause anterior
+                    currentTrackElement.querySelector('.play-button').style.display = 'inline'; // Mostra o botão Play anterior
                 }
+
+                currentTrack = track; // Armazena a referência da música atual
                 playPreview(track.preview_url, trackElement); // Passa o elemento da música para destacar
                 addToHistory(track); // Adiciona a música ao histórico
+                playButton.style.display = 'none'; // Esconde o botão Play atual
+                pauseButton.style.display = 'inline'; // Mostra o botão Pause atual
             });
 
             // Evento de pausa
             pauseButton.addEventListener('click', () => {
                 if (currentAudio) {
                     currentAudio.pause();
-                    playButton.style.display = 'inline'; // Mostra o botão play
-                    pauseButton.style.display = 'none'; // Esconde o botão pause
+                    playButton.style.display = 'inline'; // Mostra o botão Play
+                    pauseButton.style.display = 'none'; // Esconde o botão Pause
                 }
             });
         });
@@ -146,10 +154,65 @@ document.addEventListener('DOMContentLoaded', () => {
             currentAudio.addEventListener('ended', () => {
                 trackElement.classList.remove('highlight'); // Remove destaque
                 trackElement.querySelector('.progress-container').style.display = 'none'; // Esconde a barra de progresso
+                trackElement.querySelector('.pause-button').style.display = 'none'; // Esconde o botão Pause
+                trackElement.querySelector('.play-button').style.display = 'inline'; // Mostra o botão Play novamente
+
+                // Exibe a mensagem quando a música terminar
+                showFinishedMessage(currentTrack); // Passa a referência da música atual
             });
         } else {
             alert('Prévia não disponível para esta música.');
         }
+    }
+
+    // Função para exibir a mensagem ao término da música
+    function showFinishedMessage(track) {
+        const messageContainer = document.getElementById('preview-finished-message');
+        const messageText = document.getElementById('finished-message-text');
+        const spotifyLink = document.getElementById('spotify-link');
+
+        // Define o conteúdo da mensagem
+        messageText.innerHTML = `Você finalizou de ver a prévia da música, ouça completo no Spotify a música <span class="song-name">${track.name}</span>`;
+        spotifyLink.href = track.external_urls.spotify; // Atualiza o link do Spotify
+
+        // Limpa as músicas anteriores e mostra apenas a última ouvida
+        songsContainer.innerHTML = ''; // Limpa todas as músicas
+        const lastTrackElement = document.createElement('div');
+        lastTrackElement.classList.add('song-item');
+        lastTrackElement.innerHTML = `
+            <div class="album-image">
+                <img src="${track.album.images[0]?.url || ''}" alt="${track.name}">
+            </div>
+            <div class="song-info">
+                <h2 class="song-title">${track.name}</h2>
+                <p class="song-artist">${track.artists[0]?.name || 'Desconhecido'}</p>
+                <p class="song-album">${track.album.name}</p>
+                <p class="song-duration">${formatDuration(track.duration_ms)}</p> <!-- Duração da música -->
+            </div>
+        `;
+        songsContainer.appendChild(lastTrackElement); // Exibe a última música
+
+        // Mostra a mensagem
+        messageContainer.style.display = 'block';
+
+        // Adiciona eventos aos botões
+        document.getElementById('spotify-link').onclick = function() {
+            setTimeout(() => {
+                resetView(); // Reseta a página após 3 segundos
+            }, 3000); // Espera 3 segundos antes de voltar
+        };
+
+        document.getElementById('continue-exploring').onclick = function() {
+            resetView(); // Reseta a página imediatamente
+        };
+    }
+
+    // Função para resetar a visão
+    function resetView() {
+        searchInput.value = ''; // Limpa o input de pesquisa
+        songsContainer.innerHTML = ''; // Limpa as músicas exibidas
+        suggestionsContainer.innerHTML = ''; // Limpa as sugestões
+        document.getElementById('preview-finished-message').style.display = 'none'; // Esconde a mensagem
     }
 
     // Função para atualizar a barra de progresso

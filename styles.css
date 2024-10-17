@@ -158,9 +158,7 @@ body {
     flex-direction: column; /* Para organizar melhor */
     background: rgba(255, 255, 255, 0.1); /* Fundo levemente cinza para destaque */
     padding: 10px; /* Padding para espaço interno */
-    border-radius: 8px
-
-border-radius: 8px; /* Bordas arredondadas */
+    border-radius: 8px; /* Bordas arredondadas */
 }
 
 /* Estilo dos Títulos, Artistas e Álbum */
@@ -285,4 +283,53 @@ border-radius: 8px; /* Bordas arredondadas */
 .music-playing {
     background: rgba(0, 0, 0, 0.5); /* Fundo escuro para a música em execução */
     animation: highlightAnimation 0.5s infinite alternate; /* Animação suave */
+}
+
+/* Estilo da mensagem ao término da prévia */
+#preview-finished-message {
+    background-color: #1DB954; /* Verde estilo Spotify */
+    color: white; /* Cor do texto */
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 15px; /* Bordas bem arredondadas */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none; /* Ocultar por padrão */
+}
+
+/* Estilo dos botões na mensagem */
+.message-buttons {
+    display: flex; /* Flexbox para os botões */
+    justify-content: center; /* Centraliza os botões */
+    margin-top: 10px; /* Espaçamento acima dos botões */
+}
+
+#spotify-link {
+    background-color: #1DB954; /* Cor do botão de ouvir no Spotify */
+    color: white; /* Texto em branco */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-decoration: none; /* Remove sublinhado */
+    margin-right: 10px; /* Margem à direita */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+#spotify-link:hover {
+    background-color: #1aa34a; /* Cor do botão quando hover */
+}
+
+#continue-exploring {
+    background-color: #e0e0e0; /* Cor do botão continuar explorando */
+    color: black; /* Texto em preto */
+    padding: 10px 20px; /* Padding */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+#continue-exploring:hover {
+    background-color: #c0c0c0; /* Cor do botão quando hover */
 }
