@@ -25,6 +25,137 @@ body {
     100% { background-position: 100% 50%; }
 }
 
+/* Animações de Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animação para a mensagem final */
+@keyframes messageIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Classes de animação */
+.animated {
+    animation-duration: 0.5s; /* Duração da animação */
+    animation-fill-mode: forwards; /* Mantém o estado final da animação */
+}
+
+/* Estilo do Container Principal */
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; /* Padding para o container */
+    background-color: rgba(40, 40, 40, 0.9); /* Fundo semitransparente */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    opacity: 0; /* Começa invisível */
+    transform: translateY(20px); /* Começa deslocado para baixo */
+}
+
+#container.show {
+    opacity: 1; /* Fica visível */
+    transform: translateY(0); /* Retorna à posição original */
+}
+
+/* Estilo do Container de Histórico */
+#history-container {
+    background: #4b4f54; /* Cor de fundo do histórico */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-left: 20px; /* Margem à esquerda do histórico */
+    padding: 10px; /* Padding das músicas */
+    max-height: 300px; /* Altura máxima */
+    overflow-y: auto; /* Scroll se necessário */
+    width: 200px; /* Largura fixa para o histórico */
+    display: none; /* Inicialmente escondido */
+}
+
+/* Estilo da mensagem ao término da prévia */
+#preview-finished-message {
+    background-color: #1DB954; /* Verde estilo Spotify */
+    color: white; /* Cor do texto */
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 15px; /* Bordas bem arredondadas */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none; /* Ocultar por padrão */
+}
+
+/* Animação ao mostrar a mensagem de fim */
+#preview-finished-message.show {
+    opacity: 1; /* Fica visível */
+    transform: translateY(0); /* Retorna à posição original */
+}
+
+/* Estilo dos botões na mensagem */
+.message-buttons {
+    display: flex; /* Flexbox para os botões */
+    justify-content: center; /* Centraliza os botões */
+    margin-top: 10px; /* Espaçamento acima dos botões */
+}
+
+#spotify-link {
+    background-color: #1DB954; /* Cor do botão de ouvir no Spotify */
+    color: white; /* Texto em branco */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-decoration: none; /* Remove sublinhado */
+    margin-right: 10px; /* Margem à direita */
+    transition: transform 0.3s; /* Suaviza a animação */
+}
+
+#spotify-link:hover {
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+#continue-exploring {
+    background-color: #e0e0e0; /* Cor do botão continuar explorando */
+    color: black; /* Texto em preto */
+    padding: 10px 20px; /* Padding */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: transform 0.3s; /* Suaviza a animação */
+}
+
+#continue-exploring:hover {
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+/* Resto do CSS permanece inalterado... */
+
+/* Estilos Gerais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #282828; /* Cor de fundo mais suave */
+    margin: 0;
+    color: #ffffff; /* Texto em branco */
+}
+
+/* Estilo da Tela Inicial */
+#intro-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda a altura da tela */
+    background: linear-gradient(135deg, #a8e6cf, #1DB954); /* Gradiente verde claro para verde escuro */
+    animation: gradientAnimation 10s ease infinite; /* Animação do gradiente */
+    color: white;
+    text-align: center;
+}
+
+/* Animação do Gradiente */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
 /* Animações do título */
 .app-name {
     animation: pulse 2s infinite alternate, blink 1s infinite; /* Animação pulsante e de piscar */

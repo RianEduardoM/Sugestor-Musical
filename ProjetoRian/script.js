@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const historyContainer = document.getElementById('history-container');
     const historyList = document.getElementById('history-list');
     const appDescription = document.querySelector('.app-description'); // Descrição do aplicativo
+    const previewMessage = document.getElementById('preview-finished-message');
 
     const clientId = 'f09202d116c34a2ea02d05584c59fb31'; // Seu Client ID
     const clientSecret = 'aec3059e25ed4cd4bac4c11fc2228e23'; // Seu Client Secret
@@ -66,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
             songsContainer.innerHTML = '<p>Nenhuma música encontrada.</p>';
             return;
         }
+
+        // Limpa as animações anteriores
+        songsContainer.classList.remove('show');
+
+        // Cria e exibe os elementos das músicas
         tracks.forEach(track => {
             const trackElement = document.createElement('div');
             trackElement.classList.add('song-item');
@@ -92,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             songsContainer.appendChild(trackElement);
+            trackElement.classList.add('songs-animated'); // Adiciona animação a cada música
 
             // Evento de mouse para expansão
             trackElement.addEventListener('mouseenter', () => {
@@ -132,6 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+
+        // Exibe a animação de entrada da lista de músicas
+        songsContainer.classList.add('show'); 
     }
 
     // Função para tocar a música
@@ -194,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mostra a mensagem
         messageContainer.style.display = 'block';
+        messageContainer.classList.add('show'); // Adiciona a classe de animação
 
         // Adiciona eventos aos botões
         document.getElementById('spotify-link').onclick = function() {
@@ -212,7 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.value = ''; // Limpa o input de pesquisa
         songsContainer.innerHTML = ''; // Limpa as músicas exibidas
         suggestionsContainer.innerHTML = ''; // Limpa as sugestões
-        document.getElementById('preview-finished-message').style.display = 'none'; // Esconde a mensagem
+        previewMessage.classList.remove('show'); // Remove a animação da mensagem
+        previewMessage.style.display = 'none'; // Esconde a mensagem
+        // Oculta o container de músicas
+        songsContainer.classList.remove('show'); 
     }
 
     // Função para atualizar a barra de progresso
@@ -346,6 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         document.getElementById('intro-screen').style.display = 'none'; // Esconde a tela de introdução
         document.getElementById('container').style.display = 'block'; // Mostra o container principal
+        document.getElementById('container').classList.add('show'); // Adiciona a classe de animação
     }, 10000); // 10 segundos
 
     // Animação da descrição após 10 segundos
