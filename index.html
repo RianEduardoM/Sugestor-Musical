@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Fora do AR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Caixa principal com erro -->
+    <div class="info-container">
+        <h1>Site Temporariamente Fora do AR</h1>
+        <div class="button-container">
+            <button class="button" data-text="Site Fora do AR">
+                <span class="actual-text">&nbsp;Site Fora do AR&nbsp;</span>
+                <span aria-hidden="true" class="hover-text">&nbsp;Site Fora do AR&nbsp;</span>
+            </button>
+        </div>
+        <h2>Detalhes da Interrupção</h2>
+        <p>O site ficou fora do ar em <span class="highlight" id="offline-date">09/11/2024, 14:30</span></p>
+        <p>Previsão de retorno: <span class="highlight" id="return-date">12/11/2024, 14:30</span></p>
+
+        <div class="scoreboard">
+            <p><strong>Status:</strong> Em Manutenção</p>
+            <p><strong>Última Atualização:</strong> <span id="current-time"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Atualiza a hora e data do site
+        function updateCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('current-time').textContent = currentTime;
+        }
+
+        setInterval(updateCurrentTime, 1000);
+    </script>
+
+</body>
+</html>
