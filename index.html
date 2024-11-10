@@ -9,37 +9,45 @@
 <body>
 
     <!-- Caixa principal com erro -->
-    <div class="info-container">
+    <div class="container info-container">
         <h1>Site Temporariamente Fora do AR</h1>
         <div class="button-container">
             <button class="button" data-text="Site Fora do AR">
-                <span class="actual-text">&nbsp;Site Fora do AR&nbsp;</span>
+                <span class="actual-text">&nbsp; Sugestor Musical -&nbsp;</span>
                 <span aria-hidden="true" class="hover-text">&nbsp;Site Fora do AR&nbsp;</span>
             </button>
         </div>
         <h2>Detalhes da Interrupção</h2>
         <p>O site ficou fora do ar em <span class="highlight" id="offline-date">09/11/2024, 14:30</span></p>
-        <p>Previsão de retorno: <span class="highlight" id="return-date">12/11/2024, 14:30</span></p>
+        <p>Previsão de retorno: <span class="highlight" id="return-date">26/11/2024, 12:30</span></p>
+    </div>
 
-        <div class="scoreboard">
+    <!-- Painel de status -->
+    <div class="container status-container">
+        <div class="status-panel">
             <p><strong>Status:</strong> Em Manutenção</p>
             <p><strong>Última Atualização:</strong> <span id="current-time"></span></p>
+            <p><strong>Versão do Site:</strong> v2.3.4</p>
+            <p><strong>Data de Reinício:</strong> <span id="restart-date">15/11/2024</span></p>
+<p><strong>Tempo Restante:</strong> <span id="time-remaining">90:00:00</span></p>
+
+
         </div>
     </div>
 
-    <script>
-        // Atualiza a hora e data do site
-        function updateCurrentTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const currentTime = `${hours}:${minutes}:${seconds}`;
-            document.getElementById('current-time').textContent = currentTime;
-        }
+    <!-- Alternador de Tema -->
+    <div class="container theme-container">
+        <div class="theme-box">
+            <h3 class="theme-title">Tema:</h3>
+            <div class="slider-container">
+                <input type="range" min="0" max="100" value="0" class="theme-slider" id="themeSlider" aria-label="Controle deslizante para ajustar o tema">
+                <span class="emoji sun">☀️</span>
+                <span class="emoji moon">🌙</span>
+            </div>
+        </div>
+    </div>
 
-        setInterval(updateCurrentTime, 1000);
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
